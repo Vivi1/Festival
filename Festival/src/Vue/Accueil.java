@@ -33,9 +33,22 @@ public class Accueil extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mAccueil = new javax.swing.JMenu();
         mEtablissements = new javax.swing.JMenu();
+        mConsutEtab = new javax.swing.JMenuItem();
+        mAjEtab = new javax.swing.JMenuItem();
+        mModifEtab = new javax.swing.JMenuItem();
+        mSupprEtab = new javax.swing.JMenuItem();
         mTypChambres = new javax.swing.JMenu();
+        mConsultTC = new javax.swing.JMenuItem();
+        mAjTC = new javax.swing.JMenuItem();
+        mModifTC = new javax.swing.JMenuItem();
+        mSupprTC = new javax.swing.JMenuItem();
         mOffreHebergement = new javax.swing.JMenu();
+        mConsultOH = new javax.swing.JMenuItem();
+        mModifOH = new javax.swing.JMenuItem();
         mAttribution = new javax.swing.JMenu();
+        mConsultAC = new javax.swing.JMenuItem();
+        mAjAC = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -50,15 +63,58 @@ public class Accueil extends javax.swing.JFrame {
         jMenuBar1.add(mAccueil);
 
         mEtablissements.setText("Etablissements");
+
+        mConsutEtab.setText("Consulter");
+        mEtablissements.add(mConsutEtab);
+
+        mAjEtab.setText("Ajouter");
+        mEtablissements.add(mAjEtab);
+
+        mModifEtab.setText("Modifier");
+        mEtablissements.add(mModifEtab);
+
+        mSupprEtab.setText("Supprimer");
+        mEtablissements.add(mSupprEtab);
+
         jMenuBar1.add(mEtablissements);
 
         mTypChambres.setText("Type chambres");
+
+        mConsultTC.setText("Consulter");
+        mTypChambres.add(mConsultTC);
+
+        mAjTC.setText("Ajouter");
+        mTypChambres.add(mAjTC);
+
+        mModifTC.setText("Modifier");
+        mTypChambres.add(mModifTC);
+
+        mSupprTC.setText("Supprimer");
+        mTypChambres.add(mSupprTC);
+
         jMenuBar1.add(mTypChambres);
 
         mOffreHebergement.setText("Offre hébergements");
+
+        mConsultOH.setText("Consulter");
+        mOffreHebergement.add(mConsultOH);
+
+        mModifOH.setText("Modifier");
+        mOffreHebergement.add(mModifOH);
+
         jMenuBar1.add(mOffreHebergement);
 
         mAttribution.setText("Attribution chambres");
+
+        mConsultAC.setText("Consulter");
+        mAttribution.add(mConsultAC);
+
+        mAjAC.setText("Ajouter");
+        mAttribution.add(mAjAC);
+
+        jMenuItem12.setText("Modifier");
+        mAttribution.add(jMenuItem12);
+
         jMenuBar1.add(mAttribution);
 
         setJMenuBar(jMenuBar1);
@@ -127,12 +183,25 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitre;
     private javax.swing.JMenu mAccueil;
+    private javax.swing.JMenuItem mAjAC;
+    private javax.swing.JMenuItem mAjEtab;
+    private javax.swing.JMenuItem mAjTC;
     private javax.swing.JMenu mAttribution;
+    private javax.swing.JMenuItem mConsultAC;
+    private javax.swing.JMenuItem mConsultOH;
+    private javax.swing.JMenuItem mConsultTC;
+    private javax.swing.JMenuItem mConsutEtab;
     private javax.swing.JMenu mEtablissements;
+    private javax.swing.JMenuItem mModifEtab;
+    private javax.swing.JMenuItem mModifOH;
+    private javax.swing.JMenuItem mModifTC;
     private javax.swing.JMenu mOffreHebergement;
+    private javax.swing.JMenuItem mSupprEtab;
+    private javax.swing.JMenuItem mSupprTC;
     private javax.swing.JMenu mTypChambres;
     // End of variables declaration//GEN-END:variables
 }
