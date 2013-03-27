@@ -8,5 +8,5 @@
  * @author etudSIO
  */
 public class NewClass {
-    
+ private int  i;   
 }
