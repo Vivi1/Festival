@@ -242,7 +242,8 @@ public class Accueil extends javax.swing.JFrame {
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
-         ClsChangePanel.setModePanel("EtabModifier");
+         ClsChangePanel.setModePanel("EtabModifier"); 
+         
     }//GEN-LAST:event_mModifEtabActionPerformed
 
     private void mSupprEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSupprEtabActionPerformed
