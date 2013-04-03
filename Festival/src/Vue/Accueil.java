@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package Vue;
+import Hibernate.Etablissement;
 import Hibernate.HibernateUtil;
 import java.awt.Container;
 import org.hibernate.Session;
@@ -227,14 +228,16 @@ public class Accueil extends javax.swing.JFrame {
       //  this.setContentPane(pnlEtabli); 
         this.setContentPane(pnlEtab);
         pack();
-        ClsChangePanel.setModePanel("EtabConsulter");
+        ClsChangePanel.setModePanel("Consulter");
+        pnlEtab.setMode();
     }//GEN-LAST:event_mConsutEtabActionPerformed
 
     private void mAjEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjEtabActionPerformed
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
-         ClsChangePanel.setModePanel("EtabAjouter");
+         ClsChangePanel.setModePanel("Ajouter");
+         pnlEtab.setMode();
          
     }//GEN-LAST:event_mAjEtabActionPerformed
 
@@ -242,7 +245,8 @@ public class Accueil extends javax.swing.JFrame {
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
-         ClsChangePanel.setModePanel("EtabModifier"); 
+         ClsChangePanel.setModePanel("Modifier");
+         pnlEtab.setMode();
          
     }//GEN-LAST:event_mModifEtabActionPerformed
 
@@ -250,57 +254,66 @@ public class Accueil extends javax.swing.JFrame {
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
-         ClsChangePanel.setModePanel("EtabSupprimer");
+         ClsChangePanel.setModePanel("Supprimer");
+         pnlEtab.setMode();
     }//GEN-LAST:event_mSupprEtabActionPerformed
 
     private void mAjTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjTCActionPerformed
         this.setContentPane(pnlTC);
         pack();
-        ClsChangePanel.setModePanel("TcAjouter");
+        ClsChangePanel.setModePanel("Ajouter");
+        pnlTC.setMode();
     }//GEN-LAST:event_mAjTCActionPerformed
 
     private void mConsultACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultACActionPerformed
          //this.setContentPane(pnlAttri);
         this.setContentPane(pnlAtt);
         pack();
-        ClsChangePanel.setModePanel("AcConsulter");
+        ClsChangePanel.setModePanel("Consulter");
+        pnlAtt.setMode();
     }//GEN-LAST:event_mConsultACActionPerformed
 
     private void mConsultTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultTCActionPerformed
        //this.setContentPane(pnlPart);
         this.setContentPane(pnlTC);
         pack();
-        ClsChangePanel.setModePanel("TcConsulter");
+        ClsChangePanel.setModePanel("Consulter");
+        pnlTC.setMode();
     }//GEN-LAST:event_mConsultTCActionPerformed
 
     private void mConsultOHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultOHActionPerformed
         this.setContentPane(pnlHeb);
         pack();
-        ClsChangePanel.setModePanel("OhConsulter");
+        ClsChangePanel.setModePanel("Consulter");
+        pnlHeb.setMode();
     }//GEN-LAST:event_mConsultOHActionPerformed
 
     private void mModifTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifTCActionPerformed
         this.setContentPane(pnlTC);
         pack();
-        ClsChangePanel.setModePanel("TcModif");
+        ClsChangePanel.setModePanel("Modifier");
+        pnlTC.setMode();
     }//GEN-LAST:event_mModifTCActionPerformed
 
     private void mAjACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjACActionPerformed
          this.setContentPane(pnlAtt);
         pack();
-        ClsChangePanel.setModePanel("AcAjouter");
+        ClsChangePanel.setModePanel("Ajouter");
+        pnlAtt.setMode();
     }//GEN-LAST:event_mAjACActionPerformed
 
     private void mModifACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifACActionPerformed
         this.setContentPane(pnlAtt);
         pack();
-        ClsChangePanel.setModePanel("AcModifier");
+        ClsChangePanel.setModePanel("Modifier");
+        pnlAtt.setMode();
     }//GEN-LAST:event_mModifACActionPerformed
 
     private void mModifOHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifOHActionPerformed
         this.setContentPane(pnlHeb);
         pack();
-        ClsChangePanel.setModePanel("OhModifier");
+        ClsChangePanel.setModePanel("Modifier");
+        pnlHeb.setMode();
     }//GEN-LAST:event_mModifOHActionPerformed
 
     /**

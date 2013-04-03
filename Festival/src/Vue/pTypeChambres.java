@@ -116,4 +116,9 @@ public class pTypeChambres extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabTypechambres;
     // End of variables declaration//GEN-END:variables
+
+    void setMode() {
+        String sMode;
+      sMode=ClsChangePanel.getModePanel();
+    }
 }
