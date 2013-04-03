@@ -3,20 +3,28 @@
  * and open the template in the editor.
  */
 package Vue;
-
+import java.awt.Container;
 /**
  *
  * @author etudSIO
  */
 public class Accueil extends javax.swing.JFrame {
-
+        //protected pEtablissements pnlEtabli = new pEtablissements();
+//        protected pEtablissements pnlEtab = new pEtablissements();
+//        protected pAttribution pnlAttri = new pAttribution();
+//        protected pEtablissements pnlPart = new pEtablissements();
+        //protected ptest paneltest = new ptest();
+    protected pEtablissements pnlEtab = new pEtablissements();
+    protected pHebergement pnlHeb = new pHebergement();
+    protected pAttribution pnlAtt = new pAttribution();
+    protected pTypeChambres pnlTC = new pTypeChambres();
+        private Container pnlPrinc = null; 
     /**
      * Creates new form Accueil
      */
     public Accueil() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,14 +49,13 @@ public class Accueil extends javax.swing.JFrame {
         mConsultTC = new javax.swing.JMenuItem();
         mAjTC = new javax.swing.JMenuItem();
         mModifTC = new javax.swing.JMenuItem();
-        mSupprTC = new javax.swing.JMenuItem();
         mOffreHebergement = new javax.swing.JMenu();
         mConsultOH = new javax.swing.JMenuItem();
         mModifOH = new javax.swing.JMenuItem();
         mAttribution = new javax.swing.JMenu();
         mConsultAC = new javax.swing.JMenuItem();
         mAjAC = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        mModifAC = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -65,15 +72,35 @@ public class Accueil extends javax.swing.JFrame {
         mEtablissements.setText("Etablissements");
 
         mConsutEtab.setText("Consulter");
+        mConsutEtab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mConsutEtabActionPerformed(evt);
+            }
+        });
         mEtablissements.add(mConsutEtab);
 
         mAjEtab.setText("Ajouter");
+        mAjEtab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mAjEtabActionPerformed(evt);
+            }
+        });
         mEtablissements.add(mAjEtab);
 
         mModifEtab.setText("Modifier");
+        mModifEtab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mModifEtabActionPerformed(evt);
+            }
+        });
         mEtablissements.add(mModifEtab);
 
         mSupprEtab.setText("Supprimer");
+        mSupprEtab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mSupprEtabActionPerformed(evt);
+            }
+        });
         mEtablissements.add(mSupprEtab);
 
         jMenuBar1.add(mEtablissements);
@@ -81,25 +108,47 @@ public class Accueil extends javax.swing.JFrame {
         mTypChambres.setText("Type chambres");
 
         mConsultTC.setText("Consulter");
+        mConsultTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mConsultTCActionPerformed(evt);
+            }
+        });
         mTypChambres.add(mConsultTC);
 
         mAjTC.setText("Ajouter");
+        mAjTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mAjTCActionPerformed(evt);
+            }
+        });
         mTypChambres.add(mAjTC);
 
         mModifTC.setText("Modifier");
+        mModifTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mModifTCActionPerformed(evt);
+            }
+        });
         mTypChambres.add(mModifTC);
-
-        mSupprTC.setText("Supprimer");
-        mTypChambres.add(mSupprTC);
 
         jMenuBar1.add(mTypChambres);
 
         mOffreHebergement.setText("Offre hébergements");
 
         mConsultOH.setText("Consulter");
+        mConsultOH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mConsultOHActionPerformed(evt);
+            }
+        });
         mOffreHebergement.add(mConsultOH);
 
         mModifOH.setText("Modifier");
+        mModifOH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mModifOHActionPerformed(evt);
+            }
+        });
         mOffreHebergement.add(mModifOH);
 
         jMenuBar1.add(mOffreHebergement);
@@ -107,13 +156,28 @@ public class Accueil extends javax.swing.JFrame {
         mAttribution.setText("Attribution chambres");
 
         mConsultAC.setText("Consulter");
+        mConsultAC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mConsultACActionPerformed(evt);
+            }
+        });
         mAttribution.add(mConsultAC);
 
         mAjAC.setText("Ajouter");
+        mAjAC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mAjACActionPerformed(evt);
+            }
+        });
         mAttribution.add(mAjAC);
 
-        jMenuItem12.setText("Modifier");
-        mAttribution.add(jMenuItem12);
+        mModifAC.setText("Modifier");
+        mModifAC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mModifACActionPerformed(evt);
+            }
+        });
+        mAttribution.add(mModifAC);
 
         jMenuBar1.add(mAttribution);
 
@@ -144,6 +208,73 @@ public class Accueil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mConsutEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsutEtabActionPerformed
+      //  this.setContentPane(pnlEtabli); 
+        this.setContentPane(pnlEtab);
+        pack();
+    }//GEN-LAST:event_mConsutEtabActionPerformed
+
+    private void mAjEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjEtabActionPerformed
+       // this.setContentPane(pnlEtab);
+        this.setContentPane(pnlEtab);
+         pack();
+         
+    }//GEN-LAST:event_mAjEtabActionPerformed
+
+    private void mModifEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifEtabActionPerformed
+       // this.setContentPane(pnlEtab);
+        this.setContentPane(pnlEtab);
+         pack();
+    }//GEN-LAST:event_mModifEtabActionPerformed
+
+    private void mSupprEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSupprEtabActionPerformed
+       // this.setContentPane(pnlEtab);
+        this.setContentPane(pnlEtab);
+         pack();
+    }//GEN-LAST:event_mSupprEtabActionPerformed
+
+    private void mAjTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjTCActionPerformed
+        this.setContentPane(pnlTC);
+        pack();
+    }//GEN-LAST:event_mAjTCActionPerformed
+
+    private void mConsultACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultACActionPerformed
+         //this.setContentPane(pnlAttri);
+        this.setContentPane(pnlAtt);
+        pack();
+    }//GEN-LAST:event_mConsultACActionPerformed
+
+    private void mConsultTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultTCActionPerformed
+       //this.setContentPane(pnlPart);
+        this.setContentPane(pnlTC);
+        pack();
+    }//GEN-LAST:event_mConsultTCActionPerformed
+
+    private void mConsultOHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultOHActionPerformed
+        this.setContentPane(pnlHeb);
+        pack();
+    }//GEN-LAST:event_mConsultOHActionPerformed
+
+    private void mModifTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifTCActionPerformed
+        this.setContentPane(pnlTC);
+        pack();
+    }//GEN-LAST:event_mModifTCActionPerformed
+
+    private void mAjACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjACActionPerformed
+         this.setContentPane(pnlAtt);
+        pack();
+    }//GEN-LAST:event_mAjACActionPerformed
+
+    private void mModifACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifACActionPerformed
+        this.setContentPane(pnlAtt);
+        pack();
+    }//GEN-LAST:event_mModifACActionPerformed
+
+    private void mModifOHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifOHActionPerformed
+        this.setContentPane(pnlHeb);
+        pack();
+    }//GEN-LAST:event_mModifOHActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +314,6 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblTitre;
     private javax.swing.JMenu mAccueil;
@@ -196,12 +326,12 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JMenuItem mConsultTC;
     private javax.swing.JMenuItem mConsutEtab;
     private javax.swing.JMenu mEtablissements;
+    private javax.swing.JMenuItem mModifAC;
     private javax.swing.JMenuItem mModifEtab;
     private javax.swing.JMenuItem mModifOH;
     private javax.swing.JMenuItem mModifTC;
     private javax.swing.JMenu mOffreHebergement;
     private javax.swing.JMenuItem mSupprEtab;
-    private javax.swing.JMenuItem mSupprTC;
     private javax.swing.JMenu mTypChambres;
     // End of variables declaration//GEN-END:variables
 }
