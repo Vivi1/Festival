@@ -214,12 +214,14 @@ public class Accueil extends javax.swing.JFrame {
       //  this.setContentPane(pnlEtabli); 
         this.setContentPane(pnlEtab);
         pack();
+        ClsChangePanel.setModePanel("EtabConsulter");
     }//GEN-LAST:event_mConsutEtabActionPerformed
 
     private void mAjEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjEtabActionPerformed
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
+         ClsChangePanel.setModePanel("EtabAjouter");
          
     }//GEN-LAST:event_mAjEtabActionPerformed
 
@@ -227,54 +229,64 @@ public class Accueil extends javax.swing.JFrame {
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
+         ClsChangePanel.setModePanel("EtabModifier");
     }//GEN-LAST:event_mModifEtabActionPerformed
 
     private void mSupprEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSupprEtabActionPerformed
        // this.setContentPane(pnlEtab);
         this.setContentPane(pnlEtab);
          pack();
+         ClsChangePanel.setModePanel("EtabSupprimer");
     }//GEN-LAST:event_mSupprEtabActionPerformed
 
     private void mAjTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjTCActionPerformed
         this.setContentPane(pnlTC);
         pack();
+        ClsChangePanel.setModePanel("TcAjouter");
     }//GEN-LAST:event_mAjTCActionPerformed
 
     private void mConsultACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultACActionPerformed
          //this.setContentPane(pnlAttri);
         this.setContentPane(pnlAtt);
         pack();
+        ClsChangePanel.setModePanel("AcConsulter");
     }//GEN-LAST:event_mConsultACActionPerformed
 
     private void mConsultTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultTCActionPerformed
        //this.setContentPane(pnlPart);
         this.setContentPane(pnlTC);
         pack();
+        ClsChangePanel.setModePanel("TcConsulter");
     }//GEN-LAST:event_mConsultTCActionPerformed
 
     private void mConsultOHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultOHActionPerformed
         this.setContentPane(pnlHeb);
         pack();
+        ClsChangePanel.setModePanel("OhConsulter");
     }//GEN-LAST:event_mConsultOHActionPerformed
 
     private void mModifTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifTCActionPerformed
         this.setContentPane(pnlTC);
         pack();
+        ClsChangePanel.setModePanel("TcModif");
     }//GEN-LAST:event_mModifTCActionPerformed
 
     private void mAjACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjACActionPerformed
          this.setContentPane(pnlAtt);
         pack();
+        ClsChangePanel.setModePanel("AcAjouter");
     }//GEN-LAST:event_mAjACActionPerformed
 
     private void mModifACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifACActionPerformed
         this.setContentPane(pnlAtt);
         pack();
+        ClsChangePanel.setModePanel("AcModifier");
     }//GEN-LAST:event_mModifACActionPerformed
 
     private void mModifOHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModifOHActionPerformed
         this.setContentPane(pnlHeb);
         pack();
+        ClsChangePanel.setModePanel("OhModifier");
     }//GEN-LAST:event_mModifOHActionPerformed
 
     /**

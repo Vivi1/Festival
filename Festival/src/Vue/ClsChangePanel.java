@@ -10,18 +10,14 @@ package Vue;
  */
 public class ClsChangePanel {
 
-    protected String ModePanel ; 
+    protected static String ModePanel ; 
 
-    public ClsChangePanel(String panel) {
-        this.ModePanel = panel;
-    }
-
-    public String getPanel() {
+    public static String getModePanel() {
         return ModePanel;
     }
 
-    public void setPanel(String panel) {
-        this.ModePanel = panel;
+    public static void setModePanel(String ModePanel) {
+        ClsChangePanel.ModePanel = ModePanel;
     }
     
 }
