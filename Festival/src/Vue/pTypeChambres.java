@@ -128,4 +128,9 @@ public class pTypeChambres extends javax.swing.JPanel {
     private javax.swing.JLabel jLblId;
     private javax.swing.JLabel jLblTypeChambre;
     // End of variables declaration//GEN-END:variables
+
+    void setMode() {
+        String sMode;
+      sMode=ClsChangePanel.getModePanel();
+    }
 }
