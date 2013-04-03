@@ -18,7 +18,8 @@ public class Accueil extends javax.swing.JFrame {
     protected pHebergement pnlHeb = new pHebergement();
     protected pAttribution pnlAtt = new pAttribution();
     protected pTypeChambres pnlTC = new pTypeChambres();
-        private Container pnlPrinc = null; 
+        private Container pnlPrinc = null;   
+        
     /**
      * Creates new form Accueil
      */
