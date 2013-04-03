@@ -222,7 +222,9 @@ public class Accueil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public static Session getSession(){
+    return session;
+    }
     private void mConsutEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsutEtabActionPerformed
       //  this.setContentPane(pnlEtabli); 
         this.setContentPane(pnlEtab);
