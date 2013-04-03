@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package Vue;
+import Hibernate.HibernateUtil;
 import java.awt.Container;
 import org.hibernate.Session;
 /**
@@ -19,7 +20,8 @@ public class Accueil extends javax.swing.JFrame {
     protected pHebergement pnlHeb = new pHebergement();
     protected pAttribution pnlAtt = new pAttribution();
     protected pTypeChambres pnlTC = new pTypeChambres();
-        private Container pnlPrinc = null;   
+    private Container pnlPrinc = null; 
+    private static Session session = HibernateUtil.getSessionFactory().openSession();
         
     /**
      * Creates new form Accueil
