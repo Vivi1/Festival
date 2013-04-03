@@ -34,21 +34,26 @@ public class pTypeChambres extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnagir = new javax.swing.JButton();
-        jListeEtab = new javax.swing.JComboBox();
+        btnAgir = new javax.swing.JButton();
+        jListeListeChambres = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabEablissements = new javax.swing.JTable();
+        tabTypechambres = new javax.swing.JTable();
 
-        btnagir.setText("Ajouter");
+        btnAgir.setText("Ajouter");
 
-        jListeEtab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jListeListeChambres.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jListeListeChambres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListeListeChambresActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel1.setText("Etablissements");
+        jLabel1.setText("Type de chambres");
         jLabel1.setToolTipText("");
 
-        tabEablissements.setModel(new javax.swing.table.DefaultTableModel(
+        tabTypechambres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,7 +69,7 @@ public class pTypeChambres extends javax.swing.JPanel {
                 "", "", "", ""
             }
         ));
-        jScrollPane1.setViewportView(tabEablissements);
+        jScrollPane1.setViewportView(tabTypechambres);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,12 +79,12 @@ public class pTypeChambres extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(194, 194, 194)
-                        .addComponent(btnagir))
+                        .addComponent(btnAgir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jListeEtab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jListeListeChambres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -89,22 +94,26 @@ public class pTypeChambres extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jListeEtab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jListeListeChambres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(btnagir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(btnAgir)
                 .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jListeListeChambresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeListeChambresActionPerformed
+       
+    }//GEN-LAST:event_jListeListeChambresActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnagir;
+    private javax.swing.JButton btnAgir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JComboBox jListeEtab;
+    private javax.swing.JComboBox jListeListeChambres;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabEablissements;
+    private javax.swing.JTable tabTypechambres;
     // End of variables declaration//GEN-END:variables
 }
