@@ -4,6 +4,10 @@
  */
 package Vue;
 
+import Hibernate.Etablissement;
+import java.util.Iterator;
+import org.hibernate.Query;
+
 
 /**
  *
@@ -11,12 +15,14 @@ package Vue;
  */
 public class pEtablissements extends javax.swing.JPanel {
     static boolean bCharge = false;
+    private Etablissement etabselec;
 
     /**
      * Creates new form pEtablissements
      */
     public pEtablissements() {
         initComponents();
+        chargerEtablissement();
      
     }
      public void setMode(){
@@ -35,6 +41,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(true);
           NomResp.setEnabled(true);
           PrenomResp.setEnabled(true);
+          btnagir.setEnabled(false);
           
       }
       else if(sMode=="Consulter"){
@@ -49,6 +56,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(false);
           NomResp.setEnabled(false);
           PrenomResp.setEnabled(false);
+          btnagir.setEnabled(false);
       }
       else if(sMode=="Modifier"){
           Id.setEnabled(true);
@@ -62,6 +70,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(true);
           NomResp.setEnabled(true);
           PrenomResp.setEnabled(true);
+          btnagir.setEnabled(false);
       }
       else if(sMode=="Supprimer"){
           Id.setEnabled(false);
@@ -75,6 +84,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(false);
           NomResp.setEnabled(false);
           PrenomResp.setEnabled(false);
+          btnagir.setEnabled(false);
           
       }
    }
@@ -119,6 +129,11 @@ public class pEtablissements extends javax.swing.JPanel {
         btnagir.setText("Ajouter");
 
         jListeEtab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jListeEtab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jListeEtabActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Etablissements");
@@ -314,6 +329,36 @@ public class pEtablissements extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_IdActionPerformed
 
+    private void jListeEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeEtabActionPerformed
+        String sNom;
+        String sQuery;
+        Etablissement unetablissement;
+        if(bCharge)
+        {
+            sNom=(String)jListeEtab.getSelectedItem();
+            
+            //Apostrophe qui passent mal avec les requêtes
+            sNom= sNom.replace("'", "");
+            sQuery= "From Etablissement where Nom = '"+ sNom + "'";
+            Accueil.getSession().beginTransaction();
+            Query q = Accueil.getSession().createQuery(sQuery);
+            unetablissement = (Etablissement)q.uniqueResult();
+            etabselec = unetablissement;
+            Id.setText(unetablissement.getId());
+            Nom.setText(unetablissement.getNom());
+            Rue.setText(unetablissement.getAdresserue());
+            CodePostal.setText(unetablissement.getCodepostal());
+            Ville.setText(unetablissement.getVille());
+            Tel.setText(unetablissement.getTel());
+            Mail.setText(unetablissement.getAdresseelectronique());
+            Civilite.setText(unetablissement.getCiviliteresponsable());
+            NomResp.setText(unetablissement.getNomresponsable());
+            PrenomResp.setText(unetablissement.getPrenomresponsable());
+            jListeEtab.setEnabled(false);
+            btnagir.setEnabled(true);
+        }
+    }//GEN-LAST:event_jListeEtabActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Civilite;
     private javax.swing.JTextField CodePostal;
@@ -341,4 +386,19 @@ public class pEtablissements extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox jListeEtab;
     // End of variables declaration//GEN-END:variables
+
+    private void chargerEtablissement() {
+        String sReq = "from Etablissement";
+        Accueil.getSession().beginTransaction();
+        Query q = Accueil.getSession().createQuery(sReq);
+        jListeEtab.removeAllItems();
+        Iterator joueur = q.iterate();
+        while(joueur.hasNext())
+        {
+            Etablissement unetablissement = (Etablissement)joueur.next();
+            jListeEtab.addItem(unetablissement.getNom());
+        }
+        bCharge = true; //la liste a été chargé;
+    }
 }
+
