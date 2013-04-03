@@ -4,6 +4,7 @@
  */
 package Vue;
 
+import Hibernate.Typechambre;
 import org.hibernate.Query;
 
 /**
@@ -12,7 +13,7 @@ import org.hibernate.Query;
  */
 public class pTypeChambres extends javax.swing.JPanel {
     static boolean bCharge = false;
-    typechambre unechambre;
+    Typechambre unechambre;
     /**
      * Creates new form pEtablissements
      */
@@ -113,7 +114,7 @@ public class pTypeChambres extends javax.swing.JPanel {
             sQuery = "From typechambre where jou_nom = '"+ sNom +"'";
             Accueil.getSession().beginTransaction();
             Query q = Accueil.getSession().createQuery(sQuery);
-            unechambre = (typechambre)q.uniqueResult();
+            unechambre = (Typechambre)q.uniqueResult();
             jCmbTypeChambres.setEnabled(false);    
         }
                     
