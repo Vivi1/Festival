@@ -4,6 +4,7 @@
  */
 package Vue;
 import java.awt.Container;
+import org.hibernate.Session;
 /**
  *
  * @author etudSIO
