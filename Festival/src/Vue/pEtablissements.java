@@ -23,14 +23,63 @@ public class pEtablissements extends javax.swing.JPanel {
       String sMode;
       sMode=ClsChangePanel.getModePanel();
       btnagir.setText(sMode);
-      
+      if(sMode=="Ajouter"){
+          Id.setEnabled(true);
+          Nom.setEnabled(true);
+          Rue.setEnabled(true);
+          CodePostal.setEnabled(true);
+          Ville.setEnabled(true);
+          Mail.setEnabled(true);
+          Tel.setEnabled(true);
+          Type.setEnabled(true);
+          Civilite.setEnabled(true);
+          NomResp.setEnabled(true);
+          PrenomResp.setEnabled(true);
+          
+      }
+      else if(sMode=="Consulter"){
+          Id.setEnabled(false);
+          Nom.setEnabled(false);
+          Rue.setEnabled(false);
+          CodePostal.setEnabled(false);
+          Ville.setEnabled(false);
+          Mail.setEnabled(false);
+          Tel.setEnabled(false);
+          Type.setEnabled(false);
+          Civilite.setEnabled(false);
+          NomResp.setEnabled(false);
+          PrenomResp.setEnabled(false);
+      }
+      else if(sMode=="Modifier"){
+          Id.setEnabled(true);
+          Nom.setEnabled(true);
+          Rue.setEnabled(true);
+          CodePostal.setEnabled(true);
+          Ville.setEnabled(true);
+          Mail.setEnabled(true);
+          Tel.setEnabled(true);
+          Type.setEnabled(true);
+          Civilite.setEnabled(true);
+          NomResp.setEnabled(true);
+          PrenomResp.setEnabled(true);
+      }
+      else if(sMode=="Supprimer"){
+          Id.setEnabled(false);
+          Nom.setEnabled(false);
+          Rue.setEnabled(false);
+          CodePostal.setEnabled(false);
+          Ville.setEnabled(false);
+          Mail.setEnabled(false);
+          Tel.setEnabled(false);
+          Type.setEnabled(false);
+          Civilite.setEnabled(false);
+          NomResp.setEnabled(false);
+          PrenomResp.setEnabled(false);
+          
+      }
    }
-    
-
-    
-    
-    
      
+
      
     /**
      * This method is called from within the constructor to initialize the form.
