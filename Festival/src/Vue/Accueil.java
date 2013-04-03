@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 package Vue;
+import Hibernate.HibernateUtil;
 import java.awt.Container;
+import org.hibernate.Session;
 /**
  *
  * @author etudSIO
@@ -18,7 +20,8 @@ public class Accueil extends javax.swing.JFrame {
     protected pHebergement pnlHeb = new pHebergement();
     protected pAttribution pnlAtt = new pAttribution();
     protected pTypeChambres pnlTC = new pTypeChambres();
-        private Container pnlPrinc = null;   
+    private Container pnlPrinc = null; 
+    private static Session session = HibernateUtil.getSessionFactory().openSession();
         
     /**
      * Creates new form Accueil
@@ -39,6 +42,7 @@ public class Accueil extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         lblTitre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mAccueil = new javax.swing.JMenu();
         mEtablissements = new javax.swing.JMenu();
@@ -66,6 +70,8 @@ public class Accueil extends javax.swing.JFrame {
         lblTitre.setText("Bienvenue sur l'application de gestion d'hébergement du festival Folklores du monde");
 
         jLabel2.setText("Accédez aux différentes parties de l'application via le menu du haut");
+
+        jLabel1.setText("jLabel1");
 
         mAccueil.setText("Accueil");
         jMenuBar1.add(mAccueil);
@@ -193,14 +199,21 @@ public class Accueil extends javax.swing.JFrame {
                 .add(lblTitre, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .add(19, 19, 19))
             .add(layout.createSequentialGroup()
-                .add(68, 68, 68)
-                .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(68, 68, 68)
+                        .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 360, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .add(231, 231, 231)
+                        .add(jLabel1)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(103, 103, 103)
+                .add(33, 33, 33)
+                .add(jLabel1)
+                .add(56, 56, 56)
                 .add(lblTitre, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(70, 70, 70)
                 .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 53, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -324,6 +337,7 @@ public class Accueil extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

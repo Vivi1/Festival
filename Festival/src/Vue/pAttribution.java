@@ -20,9 +20,6 @@ public class pAttribution extends javax.swing.JPanel {
      
     }
 
-    
-    
-    
      
      
     /**
