@@ -23,6 +23,7 @@ public class pEtablissements extends javax.swing.JPanel {
       String sMode;
       sMode=ClsChangePanel.getModePanel();
       btnagir.setText(sMode);
+      
    }
     
 
