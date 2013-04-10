@@ -21,7 +21,8 @@ public class pTypeChambres extends javax.swing.JPanel {
      */
     public pTypeChambres() {
         initComponents();
-        chargerType();
+        chargerType(); 
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,7 +126,7 @@ public class pTypeChambres extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
      public void setMode(){
-      String sMode;
+     String sMode;
       sMode=ClsChangePanel.getModePanel();
       btnAgir.setText(sMode);
       if(sMode=="Ajouter"){
@@ -182,7 +183,28 @@ public class pTypeChambres extends javax.swing.JPanel {
     }//GEN-LAST:event_jCmbTypeChambresActionPerformed
 
     private void btnAgirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgirActionPerformed
-      
+        String sModes;
+        sModes=ClsChangePanel.getModePanel();
+        Transaction tx = Accueil.getSession().beginTransaction();
+        if(sModes=="Ajouter"){
+        Typechambre unenouvellechambre = new Typechambre();
+        unenouvellechambre.setId(TxtId.getText());
+        unenouvellechambre.setLibelle(TxtType.getText());
+        Accueil.getSession().save(unenouvellechambre);
+        tx.commit();     
+        bCharge = false;
+        javax.swing.JOptionPane.showMessageDialog(null, "Type de chambre ajouté !");
+        }
+        else if(sModes=="Modifier"){
+          Typechambre unenouvellechambre = new Typechambre();
+        unenouvellechambre.setId(TxtId.getText());
+        unenouvellechambre.setLibelle(TxtType.getText());      
+        Accueil.getSession().update(unenouvellechambre);
+        tx.commit();
+        bCharge = false;
+        javax.swing.JOptionPane.showMessageDialog(null, "Type de chambre modifié !");
+      }
+        
     }//GEN-LAST:event_btnAgirActionPerformed
 
     private void TxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdActionPerformed
