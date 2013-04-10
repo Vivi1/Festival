@@ -7,6 +7,7 @@ package Vue;
 import Hibernate.Typechambre;
 import java.util.Iterator;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -21,7 +22,6 @@ public class pTypeChambres extends javax.swing.JPanel {
     public pTypeChambres() {
         initComponents();
         chargerType();
-     
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,8 +39,15 @@ public class pTypeChambres extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLblId = new javax.swing.JLabel();
         jLblTypeChambre = new javax.swing.JLabel();
+        TxtId = new javax.swing.JTextField();
+        TxtType = new javax.swing.JTextField();
 
         btnAgir.setText("Ajouter");
+        btnAgir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgirActionPerformed(evt);
+            }
+        });
 
         jCmbTypeChambres.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCmbTypeChambres.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +63,12 @@ public class pTypeChambres extends javax.swing.JPanel {
         jLabel2.setText("Id :");
 
         jLabel3.setText("Type de chambre :");
+
+        TxtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtIdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,10 +90,14 @@ public class pTypeChambres extends javax.swing.JPanel {
                                     .addComponent(jLabel2)
                                     .addComponent(jCmbTypeChambres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
                                 .addComponent(jLblId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtType, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLblTypeChambre, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(158, Short.MAX_VALUE))
@@ -89,36 +106,66 @@ public class pTypeChambres extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCmbTypeChambres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLblId, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                    .addComponent(jLblId, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLblTypeChambre, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                    .addComponent(jLblTypeChambre, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(btnAgir)
                 .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
-     
+     public void setMode(){
+      String sMode;
+      sMode=ClsChangePanel.getModePanel();
+      btnAgir.setText(sMode);
+      if(sMode=="Ajouter"){
+          TxtId.setEnabled(true);
+          TxtType.setEnabled(true);
+          btnAgir.setEnabled(true);
+          btnAgir.setVisible(true);
+          jCmbTypeChambres.setVisible(false);
+          TxtId.setText("");
+          TxtType.setText("");
+          
+      }
+      else if(sMode=="Consulter"){
+          TxtId.setEnabled(false);
+          TxtType.setEnabled(false);
+          btnAgir.setVisible(false);
+          jCmbTypeChambres.setVisible(true);
+      }
+      else if(sMode=="Modifier"){
+          TxtId.setEnabled(true);
+          TxtType.setEnabled(true);
+          btnAgir.setEnabled(true);
+          btnAgir.setVisible(true);
+          jCmbTypeChambres.setVisible(true);
+      }
+   }
     private void jCmbTypeChambresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmbTypeChambresActionPerformed
         String sNom;
         String sQuery;
         
-//        if(bCharge){
-//            sNom = (String)jCmbTypeChambres.getSelectedItem();
-//            sNom = sNom.replace("","");
-//            sQuery = "From Typechambre where libelle = '"+ sNom +"'";
-//            Accueil.getSession().beginTransaction();
-//            Query q = Accueil.getSession().createQuery(sQuery);
-//            unechambre = (Typechambre)q.uniqueResult();
-//            jCmbTypeChambres.setEnabled(false);    
-//        }
+        if(bCharge){
+            sNom = (String)jCmbTypeChambres.getSelectedItem();
+            sNom = sNom.replace("","");
+            sQuery = "From Typechambre where libelle = '"+ sNom +"'";
+            Accueil.getSession().beginTransaction();
+            Query q = Accueil.getSession().createQuery(sQuery);
+            unechambre = (Typechambre)q.uniqueResult();
+            TxtId.setText(unechambre.getId());
+            TxtType.setText(unechambre.getLibelle());
+        }
     }
         private void chargerType(){
         String sReq = "from Typechambre";
@@ -126,17 +173,25 @@ public class pTypeChambres extends javax.swing.JPanel {
         Query q = Accueil.getSession().createQuery(sReq);
         jCmbTypeChambres.removeAllItems();
         Iterator Typechambre = q.iterate();
-        System.out.println("zzzz");
         while(Typechambre.hasNext()){
             Typechambre unechambre = (Typechambre) Typechambre.next();
             jCmbTypeChambres.addItem(unechambre.getLibelle()); 
-            System.out.println("zzaaaazz");
-            
         }
-          bCharge = true;          
+          bCharge = true; 
+          
     }//GEN-LAST:event_jCmbTypeChambresActionPerformed
 
+    private void btnAgirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgirActionPerformed
+      
+    }//GEN-LAST:event_btnAgirActionPerformed
+
+    private void TxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtIdActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TxtId;
+    private javax.swing.JTextField TxtType;
     private javax.swing.JButton btnAgir;
     private javax.swing.JComboBox jCmbTypeChambres;
     private javax.swing.JLabel jLabel1;
@@ -146,8 +201,5 @@ public class pTypeChambres extends javax.swing.JPanel {
     private javax.swing.JLabel jLblTypeChambre;
     // End of variables declaration//GEN-END:variables
 
-    void setMode() {
-        String sMode;
-      sMode=ClsChangePanel.getModePanel();
-    }
+   
 }
