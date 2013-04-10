@@ -5,6 +5,7 @@
 package Vue;
 
 import Hibernate.Typechambre;
+import java.util.Iterator;
 import org.hibernate.Query;
 
 /**
@@ -19,6 +20,7 @@ public class pTypeChambres extends javax.swing.JPanel {
      */
     public pTypeChambres() {
         initComponents();
+        chargerType();
      
     }
     /**
@@ -108,16 +110,30 @@ public class pTypeChambres extends javax.swing.JPanel {
         String sNom;
         String sQuery;
         
-        if(bCharge){
-            sNom = (String)jCmbTypeChambres.getSelectedItem();
-            sNom = sNom.replace("","");
-            sQuery = "From typechambre where jou_nom = '"+ sNom +"'";
-            Accueil.getSession().beginTransaction();
-            Query q = Accueil.getSession().createQuery(sQuery);
-            unechambre = (Typechambre)q.uniqueResult();
-            jCmbTypeChambres.setEnabled(false);    
+//        if(bCharge){
+//            sNom = (String)jCmbTypeChambres.getSelectedItem();
+//            sNom = sNom.replace("","");
+//            sQuery = "From Typechambre where libelle = '"+ sNom +"'";
+//            Accueil.getSession().beginTransaction();
+//            Query q = Accueil.getSession().createQuery(sQuery);
+//            unechambre = (Typechambre)q.uniqueResult();
+//            jCmbTypeChambres.setEnabled(false);    
+//        }
+    }
+        private void chargerType(){
+        String sReq = "from Typechambre";
+        Accueil.getSession().beginTransaction();
+        Query q = Accueil.getSession().createQuery(sReq);
+        jCmbTypeChambres.removeAllItems();
+        Iterator Typechambre = q.iterate();
+        System.out.println("zzzz");
+        while(Typechambre.hasNext()){
+            Typechambre unechambre = (Typechambre) Typechambre.next();
+            jCmbTypeChambres.addItem(unechambre.getLibelle()); 
+            System.out.println("zzaaaazz");
+            
         }
-                    
+          bCharge = true;          
     }//GEN-LAST:event_jCmbTypeChambresActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
