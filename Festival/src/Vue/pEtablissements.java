@@ -5,6 +5,8 @@
 package Vue;
 
 import Hibernate.Etablissement;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Iterator;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
@@ -43,7 +45,7 @@ public class pEtablissements extends javax.swing.JPanel {
           NomResp.setEnabled(true);
           PrenomResp.setEnabled(true);
           btnagir.setEnabled(true);
-          
+          jListeEtab.setVisible(false);
       }
       else if(sMode=="Consulter"){
           Id.setEnabled(false);
@@ -58,9 +60,11 @@ public class pEtablissements extends javax.swing.JPanel {
           NomResp.setEnabled(false);
           PrenomResp.setEnabled(false);
           btnagir.setEnabled(false);
+          jListeEtab.setVisible(true);
+          
       }
       else if(sMode=="Modifier"){
-          Id.setEnabled(true);
+          Id.setEnabled(false);
           Nom.setEnabled(true);
           Rue.setEnabled(true);
           CodePostal.setEnabled(true);
@@ -72,6 +76,7 @@ public class pEtablissements extends javax.swing.JPanel {
           NomResp.setEnabled(true);
           PrenomResp.setEnabled(true);
           btnagir.setEnabled(true);
+          jListeEtab.setVisible(true);
       }
       else if(sMode=="Supprimer"){
           Id.setEnabled(false);
@@ -86,6 +91,7 @@ public class pEtablissements extends javax.swing.JPanel {
           NomResp.setEnabled(false);
           PrenomResp.setEnabled(false);
           btnagir.setEnabled(true);
+          jListeEtab.setVisible(true);
           
       }
    }
@@ -325,7 +331,8 @@ public class pEtablissements extends javax.swing.JPanel {
     private void jListeEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jListeEtabActionPerformed
         String sNom;
         String sQuery;
-        Etablissement unetablissement;
+        //Etablissement unetablissement;
+        BigDecimal i = new BigDecimal(BigInteger.ONE);
         if(bCharge)
         {
             sNom=(String)jListeEtab.getSelectedItem();
@@ -333,10 +340,9 @@ public class pEtablissements extends javax.swing.JPanel {
             //Apostrophe qui passent mal avec les requêtes
             sNom= sNom.replace("'", "''");
             sQuery= "From Etablissement where Nom = '"+ sNom + "'";
-            Accueil.getSession().beginTransaction();
             Query q = Accueil.getSession().createQuery(sQuery);
-            unetablissement = (Etablissement)q.uniqueResult();
-            etabselec = unetablissement;
+            //unetablissement = 
+            etabselec = (Etablissement)q.uniqueResult();//unetablissement;
             Id.setText(etabselec.getId());
             Nom.setText(etabselec.getNom());
             Rue.setText(etabselec.getAdresserue());
@@ -347,7 +353,14 @@ public class pEtablissements extends javax.swing.JPanel {
             Civilite.setText(etabselec.getCiviliteresponsable());
             NomResp.setText(etabselec.getNomresponsable());
             PrenomResp.setText(etabselec.getPrenomresponsable());
-            btnagir.setEnabled(true);
+            if (etabselec.getType().equals(i)){
+                Type.setText("1");
+            }
+            else{
+                Type.setText("0");
+            }
+
+            
         }
        
     }//GEN-LAST:event_jListeEtabActionPerformed
@@ -359,8 +372,10 @@ public class pEtablissements extends javax.swing.JPanel {
     private void btnagirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagirActionPerformed
         String sModes;
         sModes=ClsChangePanel.getModePanel();
-        Transaction tx = Accueil.getSession().beginTransaction();
+        
         if(sModes=="Ajouter"){
+        int j= Integer.parseInt(Type.getText());
+        BigDecimal i = new BigDecimal(j);
         Etablissement unetablissement = new Etablissement();
         unetablissement.setId(Id.getText());
         unetablissement.setNom(Nom.getText());
@@ -372,36 +387,48 @@ public class pEtablissements extends javax.swing.JPanel {
         unetablissement.setCiviliteresponsable(Civilite.getText());
         unetablissement.setNomresponsable(NomResp.getText());
         unetablissement.setPrenomresponsable(PrenomResp.getText());
-        unetablissement.setNomresponsable(NomResp.getText());
+        unetablissement.setType(i);
+        Transaction tx = Accueil.getSession().beginTransaction();
         Accueil.getSession().save(unetablissement);
+        
         tx.commit();     
         bCharge = false;
+        chargerEtablissement();
         javax.swing.JOptionPane.showMessageDialog(null, "Etablissement ajouté");
         }
         else if(sModes=="Modifier"){
-          Etablissement unetablissement = new Etablissement();
-            unetablissement.setId(Id.getText());
-            unetablissement.setNom(Nom.getText());
-            unetablissement.setAdresserue(Rue.getText());
-            unetablissement.setCodepostal(CodePostal.getText());
-            unetablissement.setVille(Ville.getText());
-            unetablissement.setTel(Tel.getText());
-            unetablissement.setAdresseelectronique(Mail.getText());
-            unetablissement.setCiviliteresponsable(Civilite.getText());
-            unetablissement.setNomresponsable(NomResp.getText());
-            unetablissement.setPrenomresponsable(PrenomResp.getText());
-            unetablissement.setNomresponsable(NomResp.getText());      
-            Accueil.getSession().update(unetablissement);
+            
+            //Etablissement unetablissement1 = new Etablissement();
+            int j= Integer.parseInt(Type.getText());
+            BigDecimal i = new BigDecimal(j);
+            etabselec.setId(Id.getText());
+            etabselec.setNom(Nom.getText());
+            etabselec.setAdresserue(Rue.getText());
+            etabselec.setCodepostal(CodePostal.getText());
+            etabselec.setVille(Ville.getText());
+            etabselec.setTel(Tel.getText());
+            etabselec.setAdresseelectronique(Mail.getText());
+            etabselec.setCiviliteresponsable(Civilite.getText());
+            etabselec.setNomresponsable(NomResp.getText());
+            etabselec.setPrenomresponsable(PrenomResp.getText());
+            etabselec.setType(i);
+            Transaction tx = Accueil.getSession().beginTransaction();
+            Accueil.getSession().update(etabselec);
             tx.commit();
             bCharge = false;
+            chargerEtablissement();
+            
             javax.swing.JOptionPane.showMessageDialog(null, "Etablissement modifié");
         }
         else if(sModes=="Supprimer"){
-            Etablissement unetablissement = new Etablissement();
-            unetablissement.setId(Id.getText());
-            Accueil.getSession().delete(unetablissement);
+            
+            
+            Transaction tx = Accueil.getSession().beginTransaction();
+            Accueil.getSession().delete(etabselec);
             tx.commit();   
             bCharge = false;
+            chargerEtablissement();
+         
             javax.swing.JOptionPane.showMessageDialog(null, "Etablissement supprimé");
         }
     }//GEN-LAST:event_btnagirActionPerformed
