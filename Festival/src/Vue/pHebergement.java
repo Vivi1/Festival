@@ -4,17 +4,30 @@
  */
 package Vue;
 
+import Hibernate.Etablissement;
+import Hibernate.Offre;
+
+import Hibernate.Typechambre;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Query;
+
 /**
  *
  * @author etudSIO
  */
 public class pHebergement extends javax.swing.JPanel {
+    private boolean bCharge=false;
+    private boolean cCharge=false;
 
     /**
      * Creates new form pHebergement
      */
     public pHebergement() {
         initComponents();
+        chargerEtablissement();
+      
+  
     }
 
     /**
@@ -26,33 +39,266 @@ public class pHebergement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jcmbEtab = new javax.swing.JComboBox();
+        jlblEtab = new javax.swing.JLabel();
+        jScrollPane = new javax.swing.JScrollPane();
+        tabTypeChambre = new javax.swing.JTable();
+        jtextNbchambre = new javax.swing.JTextField();
+        jbtnModifier = new javax.swing.JButton();
+        jlblNbchambre = new javax.swing.JLabel();
 
-        jLabel1.setText("labael");
+        jcmbEtab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcmbEtab.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcmbEtabItemStateChanged(evt);
+            }
+        });
+        jcmbEtab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmbEtabActionPerformed(evt);
+            }
+        });
+
+        jlblEtab.setText("Etablissement :");
+
+        tabTypeChambre.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "", "", ""
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane.setViewportView(tabTypeChambre);
+
+        jbtnModifier.setText("Modifier");
+
+        jlblNbchambre.setText("Nombres de chambres");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlblEtab, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcmbEtab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jlblNbchambre)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtextNbchambre, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnModifier)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblEtab, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcmbEtab))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtextNbchambre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnModifier)
+                    .addComponent(jlblNbchambre))
+                .addGap(73, 73, 73))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcmbEtabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmbEtabActionPerformed
+     
+    }//GEN-LAST:event_jcmbEtabActionPerformed
+
+    private void jcmbEtabItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbEtabItemStateChanged
+      String  Test;
+      int inbligne;
+      int i;
+        Test = (String) jcmbEtab.getSelectedItem();
+        if(Test!="--Choisir l'établissement--"){
+         RemplissageTable();      
+        }
+        else {
+             inbligne = tabTypeChambre.getRowCount();
+            if( inbligne > 0)
+            {
+                for (i=0; i<inbligne;i++)
+                {
+                    ((DefaultTableModel)tabTypeChambre.getModel()).removeRow(0);
+                }
+            }
+        }
+         
+    }//GEN-LAST:event_jcmbEtabItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton jbtnModifier;
+    private javax.swing.JComboBox jcmbEtab;
+    private javax.swing.JLabel jlblEtab;
+    private javax.swing.JLabel jlblNbchambre;
+    private javax.swing.JTextField jtextNbchambre;
+    private javax.swing.JTable tabTypeChambre;
     // End of variables declaration//GEN-END:variables
 
-    void setMode() {
+    public void  setMode() {
         String sMode;
       sMode=ClsChangePanel.getModePanel();
+        if (sMode=="Consulter"){
+      
+            jbtnModifier.setVisible(false);
+            jtextNbchambre.setVisible(false);
+            jlblNbchambre.setVisible(false);
+            tabTypeChambre.setVisible(true);
+        }
+            else {
+            
+            jbtnModifier.setVisible(true);
+            jtextNbchambre.setVisible(true);
+            jlblNbchambre.setVisible(true);
+            tabTypeChambre.setVisible(false);
+            
+        }       
+            
+      }
+  
+            
+    
+    //Charge la liste des établissement
+    private void chargerEtablissement() {
+        String sReq = "from Etablissement";
+        Accueil.getSession().beginTransaction();
+        Query q = Accueil.getSession().createQuery(sReq);
+        jcmbEtab.removeAllItems();
+        jcmbEtab.addItem("--Choisir l'établissement--");
+        Iterator etablissement = q.iterate();
+        while(etablissement.hasNext())
+        {
+            Etablissement unetablissement = (Etablissement)etablissement.next();
+            jcmbEtab.addItem(unetablissement.getNom());
+            
+        }
+        bCharge = true; //la liste a été chargé;
     }
+     private void RemplissageTable(){
+        String sNomEtab;
+        int l=0;
+        int inbligne;
+        int i;
+       if(bCharge){
+           //on efface la jtableOffreH
+           inbligne = tabTypeChambre.getRowCount();
+           if (inbligne > 0){
+               for(i=0;i<inbligne-l;i++){
+                   ((DefaultTableModel)tabTypeChambre.getModel()).removeRow(0);
+               }
+           
+           }
+     
+        //affichage des Chambres
+        String sReq0= "from Typechambre";
+       Accueil.getSession().beginTransaction();
+       Query q0 = Accueil.getSession().createQuery(sReq0);
+       Iterator offreType = q0.iterate();
+        //Affiche toutes les types de chambre ( ID et Libelle )
+       while(offreType.hasNext()){
+           Typechambre unType = (Typechambre)offreType.next();
+           ((DefaultTableModel) tabTypeChambre.getModel()).addRow(new Object[]
+            { unType.getId(), unType.getLibelle(), 0
+          }) ;
+           
+       }
+  
+       //selection de l'établissement
+       sNomEtab = (String)jcmbEtab.getSelectedItem();
+       //remplacement des cotes par des doubles cotes
+       sNomEtab = sNomEtab.replace("'" , "''");
+       String sReq= "from Etablissement where NOM = '"+sNomEtab+"'";
+       Accueil.getSession().beginTransaction();
+       Query q = Accueil.getSession().createQuery(sReq);
+       Etablissement unetablissement = (Etablissement)q.uniqueResult();
+       Iterator offre = unetablissement.getOffres().iterator();
+       
+       int nbr;
+       //compte le nombre de ligne qu'il y a dans le tableau
+       nbr = tabTypeChambre.getRowCount();
+       while(offre.hasNext()){
+          /* String id;
+           int idl;
+          id = uneoffre.getTypechambre().getId();
+          id = id.substring(1);
+          idl= Integer.parseInt(id);*/
+          Offre uneoffre = (Offre)offre.next();
+          for(i=0;i<nbr;i++){
+             if(((DefaultTableModel)tabTypeChambre.getModel()).getValueAt(i,0).toString().equals(uneoffre.getTypechambre().getId()))
+             {
+              tabTypeChambre.getModel().setValueAt(uneoffre.getNombrechambres(),i,2) ;
+             }
+          }
+       }
+      }
+       bCharge = true;
+     }
+    
+//    private void chargerType() {
+//          String sReq = "from Typechambre";
+//        Accueil.getSession().beginTransaction();
+//        Query q = Accueil.getSession().createQuery(sReq);
+//        jcmbType.removeAllItems();
+//        Iterator unTypeChambre = q.iterate();
+//        while(unTypeChambre.hasNext())
+//        {
+//            Typechambre unetablissement = (Typechambre)unTypeChambre.next();
+//            jcmbType.addItem(unetablissement.getId());
+//            
+//        }  
+//        cCharge = true; //la liste a été chargé;
+//    }
+ 
+
+//    private void chargerNbchambre() {
+//        if(bCharge && cCharge){
+//            jtextNbchambre.setText("");
+//            String sLibelle = (String)jcmbEtab.getSelectedItem();                                                                                                                             
+//            String hql="Select e.id from Etablissement e where  NOM ='"+ sLibelle + "'";
+//            Accueil.getSession().beginTransaction();
+//           Query qu = Accueil.getSession().createQuery(hql);
+//           String idEtab = (String)qu.uniqueResult();
+//           
+//           OffreId idoff = null;
+//           
+//           idoff.setIdetab(idEtab);
+//           idoff.setIdtypechambre(sCodeType);
+//           
+//          String sReq = "select off.nombrechambres from Offre off, where Off.OffreId="+ idoff+";";
+//        Query q = Accueil.getSession().createQuery(sReq);
+//        if (q ==null){
+//            
+//        }
+//        jtextNbchambre.setText(q.toString() );
+//            
+//        }
+//    }
 }
