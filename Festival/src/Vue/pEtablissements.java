@@ -7,6 +7,7 @@ package Vue;
 import Hibernate.Etablissement;
 import java.util.Iterator;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 
 
 /**
@@ -41,7 +42,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(true);
           NomResp.setEnabled(true);
           PrenomResp.setEnabled(true);
-          btnagir.setEnabled(false);
+          btnagir.setEnabled(true);
           
       }
       else if(sMode=="Consulter"){
@@ -70,7 +71,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(true);
           NomResp.setEnabled(true);
           PrenomResp.setEnabled(true);
-          btnagir.setEnabled(false);
+          btnagir.setEnabled(true);
       }
       else if(sMode=="Supprimer"){
           Id.setEnabled(false);
@@ -84,7 +85,7 @@ public class pEtablissements extends javax.swing.JPanel {
           Civilite.setEnabled(false);
           NomResp.setEnabled(false);
           PrenomResp.setEnabled(false);
-          btnagir.setEnabled(false);
+          btnagir.setEnabled(true);
           
       }
    }
@@ -127,6 +128,11 @@ public class pEtablissements extends javax.swing.JPanel {
         Tel = new javax.swing.JTextField();
 
         btnagir.setText("Ajouter");
+        btnagir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnagirActionPerformed(evt);
+            }
+        });
 
         jListeEtab.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jListeEtab.addActionListener(new java.awt.event.ActionListener() {
@@ -178,10 +184,6 @@ public class pEtablissements extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(192, 192, 192)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -205,47 +207,53 @@ public class pEtablissements extends javax.swing.JPanel {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(15, 15, 15)))
-                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CodePostal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Nom, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Ville, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Tel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Rue, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Nom, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(Id, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(Ville, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(Tel, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(Rue)
+                            .addComponent(CodePostal, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnagir)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(32, 32, 32)
-                                .addComponent(PrenomResp, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnagir)
+                                        .addGap(87, 87, 87))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(PrenomResp, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(NomResp, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(NomResp, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Civilite, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Mail, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Civilite, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,30 +331,80 @@ public class pEtablissements extends javax.swing.JPanel {
             sNom=(String)jListeEtab.getSelectedItem();
             
             //Apostrophe qui passent mal avec les requêtes
-            sNom= sNom.replace("'", "");
+            sNom= sNom.replace("'", "''");
             sQuery= "From Etablissement where Nom = '"+ sNom + "'";
             Accueil.getSession().beginTransaction();
             Query q = Accueil.getSession().createQuery(sQuery);
             unetablissement = (Etablissement)q.uniqueResult();
             etabselec = unetablissement;
-            Id.setText(unetablissement.getId());
-            Nom.setText(unetablissement.getNom());
-            Rue.setText(unetablissement.getAdresserue());
-            CodePostal.setText(unetablissement.getCodepostal());
-            Ville.setText(unetablissement.getVille());
-            Tel.setText(unetablissement.getTel());
-            Mail.setText(unetablissement.getAdresseelectronique());
-            Civilite.setText(unetablissement.getCiviliteresponsable());
-            NomResp.setText(unetablissement.getNomresponsable());
-            PrenomResp.setText(unetablissement.getPrenomresponsable());
-            jListeEtab.setEnabled(false);
+            Id.setText(etabselec.getId());
+            Nom.setText(etabselec.getNom());
+            Rue.setText(etabselec.getAdresserue());
+            CodePostal.setText(etabselec.getCodepostal());
+            Ville.setText(etabselec.getVille());
+            Tel.setText(etabselec.getTel());
+            Mail.setText(etabselec.getAdresseelectronique());
+            Civilite.setText(etabselec.getCiviliteresponsable());
+            NomResp.setText(etabselec.getNomresponsable());
+            PrenomResp.setText(etabselec.getPrenomresponsable());
             btnagir.setEnabled(true);
         }
+       
     }//GEN-LAST:event_jListeEtabActionPerformed
 
     private void MailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MailActionPerformed
+
+    private void btnagirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagirActionPerformed
+        String sModes;
+        sModes=ClsChangePanel.getModePanel();
+        Transaction tx = Accueil.getSession().beginTransaction();
+        if(sModes=="Ajouter"){
+        Etablissement unetablissement = new Etablissement();
+        unetablissement.setId(Id.getText());
+        unetablissement.setNom(Nom.getText());
+        unetablissement.setAdresserue(Rue.getText());
+        unetablissement.setCodepostal(CodePostal.getText());
+        unetablissement.setVille(Ville.getText());
+        unetablissement.setTel(Tel.getText());
+        unetablissement.setAdresseelectronique(Mail.getText());
+        unetablissement.setCiviliteresponsable(Civilite.getText());
+        unetablissement.setNomresponsable(NomResp.getText());
+        unetablissement.setPrenomresponsable(PrenomResp.getText());
+        unetablissement.setNomresponsable(NomResp.getText());
+        Accueil.getSession().save(unetablissement);
+        tx.commit();     
+        bCharge = false;
+        javax.swing.JOptionPane.showMessageDialog(null, "Etablissement ajouté");
+        }
+        else if(sModes=="Modifier"){
+          Etablissement unetablissement = new Etablissement();
+            unetablissement.setId(Id.getText());
+            unetablissement.setNom(Nom.getText());
+            unetablissement.setAdresserue(Rue.getText());
+            unetablissement.setCodepostal(CodePostal.getText());
+            unetablissement.setVille(Ville.getText());
+            unetablissement.setTel(Tel.getText());
+            unetablissement.setAdresseelectronique(Mail.getText());
+            unetablissement.setCiviliteresponsable(Civilite.getText());
+            unetablissement.setNomresponsable(NomResp.getText());
+            unetablissement.setPrenomresponsable(PrenomResp.getText());
+            unetablissement.setNomresponsable(NomResp.getText());      
+            Accueil.getSession().update(unetablissement);
+            tx.commit();
+            bCharge = false;
+            javax.swing.JOptionPane.showMessageDialog(null, "Etablissement modifié");
+        }
+        else if(sModes=="Supprimer"){
+            Etablissement unetablissement = new Etablissement();
+            unetablissement.setId(Id.getText());
+            Accueil.getSession().delete(unetablissement);
+            tx.commit();   
+            bCharge = false;
+            javax.swing.JOptionPane.showMessageDialog(null, "Etablissement supprimé");
+        }
+    }//GEN-LAST:event_btnagirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Civilite;
@@ -381,13 +439,13 @@ public class pEtablissements extends javax.swing.JPanel {
         Accueil.getSession().beginTransaction();
         Query q = Accueil.getSession().createQuery(sReq);
         jListeEtab.removeAllItems();
-        Iterator joueur = q.iterate();
-        while(joueur.hasNext())
+        Iterator etablissement = q.iterate();
+        while(etablissement.hasNext())
         {
-            Etablissement unetablissement = (Etablissement)joueur.next();
+            Etablissement unetablissement = (Etablissement)etablissement.next();
             jListeEtab.addItem(unetablissement.getNom());
         }
-        bCharge = true; //la liste a été chargé;
+        bCharge = true; //la liste a été chargée;
     }
 }
 
