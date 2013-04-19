@@ -81,9 +81,19 @@ public class pHebergement extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabTypeChambre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabTypeChambreMouseClicked(evt);
+            }
+        });
         jScrollPane.setViewportView(tabTypeChambre);
 
         jbtnModifier.setText("Modifier");
+        jbtnModifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnModifierActionPerformed(evt);
+            }
+        });
 
         jlblNbchambre.setText("Nombres de chambres");
 
@@ -153,6 +163,18 @@ public class pHebergement extends javax.swing.JPanel {
          
     }//GEN-LAST:event_jcmbEtabItemStateChanged
 
+    private void tabTypeChambreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabTypeChambreMouseClicked
+        String NbrChamString = tabTypeChambre.getValueAt(tabTypeChambre.getSelectedRow(), 2).toString();
+        jtextNbchambre.setText(NbrChamString);
+    }//GEN-LAST:event_tabTypeChambreMouseClicked
+
+    private void jbtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifierActionPerformed
+        String NbrC = tabTypeChambre.getValueAt(tabTypeChambre.getSelectedRow(), 0).toString();
+        String sReq = "from Etablissement ";
+        Accueil.getSession().beginTransaction();
+        Query q = Accueil.getSession().createQuery(sReq);
+    }//GEN-LAST:event_jbtnModifierActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JButton jbtnModifier;
@@ -168,21 +190,14 @@ public class pHebergement extends javax.swing.JPanel {
       sMode=ClsChangePanel.getModePanel();
         if (sMode=="Consulter"){
       
-            jbtnModifier.setVisible(false);
-            jtextNbchambre.setVisible(false);
-            jlblNbchambre.setVisible(false);
-            tabTypeChambre.setVisible(true);
-        }
-            else {
-            
             jbtnModifier.setVisible(true);
             jtextNbchambre.setVisible(true);
             jlblNbchambre.setVisible(true);
-            tabTypeChambre.setVisible(false);
+            tabTypeChambre.setVisible(true);
             
-        }       
             
       }
+    }
   
             
     
