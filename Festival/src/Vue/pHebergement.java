@@ -8,9 +8,12 @@ import Hibernate.Etablissement;
 import Hibernate.Offre;
 
 import Hibernate.Typechambre;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -169,10 +172,25 @@ public class pHebergement extends javax.swing.JPanel {
     }//GEN-LAST:event_tabTypeChambreMouseClicked
 
     private void jbtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifierActionPerformed
-        String NbrC = tabTypeChambre.getValueAt(tabTypeChambre.getSelectedRow(), 0).toString();
-        String sReq = "from Etablissement ";
+     BigDecimal i = new BigDecimal(BigInteger.ONE);
+        String idType  = tabTypeChambre.getValueAt(tabTypeChambre.getSelectedRow(), 0).toString();
+        String sNomEtab= (String) jcmbEtab.getSelectedItem();
+        String sReq= "from Etablissement where NOM = '"+sNomEtab+"'";
         Accueil.getSession().beginTransaction();
         Query q = Accueil.getSession().createQuery(sReq);
+        Etablissement unetablissement = (Etablissement)q.uniqueResult();
+        String IdEtab = unetablissement.getId();
+        String hql ="from Offre where IDTYPECHAMBRE='"+idType+"' and IDETAB = '"+IdEtab+"'";
+        Accueil.getSession().beginTransaction();
+        Query exhql = Accueil.getSession().createQuery(hql);
+        Offre unOffre = (Offre)exhql.uniqueResult();
+        String NbreChambre = jtextNbchambre.getText();
+        i = new BigDecimal(NbreChambre);
+        unOffre.setNombrechambres(i);
+        Transaction tx = Accueil.getSession().beginTransaction();
+            Accueil.getSession().update(unOffre);
+            tx.commit();
+        
     }//GEN-LAST:event_jbtnModifierActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
