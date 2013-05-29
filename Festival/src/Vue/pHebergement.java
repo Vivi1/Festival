@@ -6,6 +6,7 @@ package Vue;
 
 import Hibernate.Etablissement;
 import Hibernate.Offre;
+import Hibernate.OffreId;
 
 import Hibernate.Typechambre;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
+import org.hibernate.tool.hbm2x.DAOExporter;
 
 /**
  *
@@ -171,26 +173,95 @@ public class pHebergement extends javax.swing.JPanel {
         jtextNbchambre.setText(NbrChamString);
     }//GEN-LAST:event_tabTypeChambreMouseClicked
 
+//    //Ajouter une offre 
+//        private void ajouter(String idetab,String idtype,Integer nbch) {
+//            
+//        String sql ="INSERT INTO `offre` VALUES('"+idetab+"','"+idtype+"',"+nbch+");";
+//        Accueil.getSession().beginTransaction();
+//        Query exsql = Accueil.getSession().createSQLQuery(sql);
+//         
+//            Transaction tx = Accueil.getSession().beginTransaction();
+//           exsql.executeUpdate();
+//            tx.commit();
+//    }
     private void jbtnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModifierActionPerformed
-     BigDecimal i = new BigDecimal(BigInteger.ONE);
+        boolean test;
+        BigDecimal i = new BigDecimal(BigInteger.ONE);
         String idType  = tabTypeChambre.getValueAt(tabTypeChambre.getSelectedRow(), 0).toString();
         String sNomEtab= (String) jcmbEtab.getSelectedItem();
-        String sReq= "from Etablissement where NOM = '"+sNomEtab+"'";
-        Accueil.getSession().beginTransaction();
-        Query q = Accueil.getSession().createQuery(sReq);
-        Etablissement unetablissement = (Etablissement)q.uniqueResult();
+        sNomEtab = sNomEtab.replace("'" , "''");
+        Etablissement unetablissement= DAO.EtablissementDAO.getEtabliByNom(sNomEtab);
+//        String sReq= "from Etablissement where NOM = '"+sNomEtab+"'";
+//        Accueil.getSession().beginTransaction();
+//        Query q = Accueil.getSession().createQuery(sReq);
+//        Etablissement unetablissement = (Etablissement)q.uniqueResult();
         String IdEtab = unetablissement.getId();
-        String hql ="from Offre where IDTYPECHAMBRE='"+idType+"' and IDETAB = '"+IdEtab+"'";
-        Accueil.getSession().beginTransaction();
-        Query exhql = Accueil.getSession().createQuery(hql);
-        Offre unOffre = (Offre)exhql.uniqueResult();
-        String NbreChambre = jtextNbchambre.getText();
-        i = new BigDecimal(NbreChambre);
-        unOffre.setNombrechambres(i);
-        Transaction tx = Accueil.getSession().beginTransaction();
-            Accueil.getSession().update(unOffre);
-            tx.commit();
         
+        Offre uneOffreUp =DAO.HebergementDAO.trouverOffre(idType,IdEtab);
+//        String hql ="from Offre where IDTYPECHAMBRE='"+idType+"' and IDETAB = '"+IdEtab+"'";
+//        Accueil.getSession().beginTransaction();
+//        Query exhql = Accueil.getSession().createQuery(hql);
+        //Offre uneOffreUp = (Offre)exhql.uniqueResult();
+        
+        if (uneOffreUp==null){
+            
+            String NbreChambre =jtextNbchambre.getText();
+            //test=VerifNbrChambre(NbreChambre);
+            //Integer nbr=Integer.parseInt(NbreChambre);
+            i = new BigDecimal(NbreChambre);
+            //unOffre.setNombrechambres(i);
+            
+//            String hql1="from Etablissement e where  NOM ='"+ sLibelle + "'";
+//            Accueil.getSession().beginTransaction();
+//           Query qu1 = Accueil.getSession().createQuery(hql1);
+//           Etablissement Etab = (Etablissement)qu1.uniqueResult();
+           
+            
+            
+            OffreId offreid=new OffreId(IdEtab, idType);
+            
+            Typechambre typech = (Typechambre)Accueil.getSession().load(Typechambre.class,idType);
+            Offre uneOffreAdd = new Offre(offreid, typech, unetablissement, i);
+            DAO.HebergementDAO.ajouter(uneOffreAdd);
+            //Transaction tx = Accueil.getSession().beginTransaction();
+            //Accueil.getSession().save(uneOffreAdd);
+            //tx.commit();
+             RemplissageTable();
+        
+        //ajouter( IdEtab, idType, nbr);
+        
+            
+            
+            
+//            
+//             String hql2 ="from Typechambre where id='"+idType+"'";
+//        Accueil.getSession().beginTransaction();
+//        Query exhql2 = Accueil.getSession().createQuery(hql2);
+//       Typechambre Typech = (Typechambre)exhql2.uniqueResult();
+            //   OffreId Id = null;
+            //Id.setIdTypeChambre(Typech.getId());
+            //Id.setIdEtab(unetablissement.getId());
+                    
+        //  unOffre.setId(Id);
+          //  unOffre.setEtablissement(unetablissement);
+            //unOffre.setTypechambre(Typech);
+        }
+        
+        else{
+        String NbreChambre = jtextNbchambre.getText();
+        //test=VerifNbrChambre(NbreChambre);
+        i = new BigDecimal(NbreChambre);
+        uneOffreUp.setNombrechambres(i);
+       DAO.HebergementDAO.Modifier(uneOffreUp);
+//        Transaction tx = Accueil.getSession().beginTransaction();
+//            Accueil.getSession().update(uneOffreUp);
+//            tx.commit();
+            javax.swing.JOptionPane.showMessageDialog(null, "Modification effectuée");
+        }
+        
+        
+   
+        RemplissageTable();
     }//GEN-LAST:event_jbtnModifierActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -202,6 +273,7 @@ public class pHebergement extends javax.swing.JPanel {
     private javax.swing.JTextField jtextNbchambre;
     private javax.swing.JTable tabTypeChambre;
     // End of variables declaration//GEN-END:variables
+
 
     public void  setMode() {
         String sMode;
@@ -221,9 +293,10 @@ public class pHebergement extends javax.swing.JPanel {
     
     //Charge la liste des établissement
     private void chargerEtablissement() {
-        String sReq = "from Etablissement";
-        Accueil.getSession().beginTransaction();
-        Query q = Accueil.getSession().createQuery(sReq);
+      Query q= DAO.EtablissementDAO.listeEtab();
+//        String sReq = "from Etablissement";
+//        Accueil.getSession().beginTransaction();
+//        Query q = Accueil.getSession().createQuery(sReq);
         jcmbEtab.removeAllItems();
         jcmbEtab.addItem("--Choisir l'établissement--");
         Iterator etablissement = q.iterate();
@@ -235,6 +308,7 @@ public class pHebergement extends javax.swing.JPanel {
         }
         bCharge = true; //la liste a été chargé;
     }
+    
      private void RemplissageTable(){
         String sNomEtab;
         int l=0;
@@ -268,10 +342,11 @@ public class pHebergement extends javax.swing.JPanel {
        sNomEtab = (String)jcmbEtab.getSelectedItem();
        //remplacement des cotes par des doubles cotes
        sNomEtab = sNomEtab.replace("'" , "''");
-       String sReq= "from Etablissement where NOM = '"+sNomEtab+"'";
-       Accueil.getSession().beginTransaction();
-       Query q = Accueil.getSession().createQuery(sReq);
-       Etablissement unetablissement = (Etablissement)q.uniqueResult();
+       Etablissement unetablissement= DAO.EtablissementDAO.getEtabliByNom(sNomEtab);
+//       String sReq= "from Etablissement where NOM = '"+sNomEtab+"'";
+//       Accueil.getSession().beginTransaction();
+//       Query q = Accueil.getSession().createQuery(sReq);
+//       Etablissement unetablissement = (Etablissement)q.uniqueResult();
        Iterator offre = unetablissement.getOffres().iterator();
        
        int nbr;
@@ -333,5 +408,19 @@ public class pHebergement extends javax.swing.JPanel {
 //        jtextNbchambre.setText(q.toString() );
 //            
 //        }
+//    }
+        //Controle pour vérifier si c un numérique
+//    private boolean VerifNbrChambre(String NbreChambre) {
+//       boolean test;
+//        try {
+//            Integer nbr=Integer.parseInt(NbreChambre);
+//           test=true;
+//        }
+//        catch(NumberFormatException e){
+//            test=false;
+//            javax.swing.JOptionPane.showMessageDialog(null, "Veuillez saisir un entier positif");
+//            
+//        }
+//        return test;
 //    }
 }
