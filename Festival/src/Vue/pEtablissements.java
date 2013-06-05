@@ -400,13 +400,9 @@ public class pEtablissements extends javax.swing.JPanel {
         unetablissement.setNomresponsable(NomResp.getText());
         unetablissement.setPrenomresponsable(PrenomResp.getText());
         unetablissement.setType(i);
-        Transaction tx = Accueil.getSession().beginTransaction();
-        
-            
-        
+        Transaction tr = Accueil.getSession().beginTransaction();
         Accueil.getSession().save(unetablissement);
-        
-        tx.commit();     
+        tr.commit();     
         bCharge = false;
         chargerEtablissement();
         javax.swing.JOptionPane.showMessageDialog(null, "Etablissement ajouté");
@@ -438,9 +434,9 @@ public class pEtablissements extends javax.swing.JPanel {
         else if(sModes=="Supprimer"){
             
             
-            Transaction tx = Accueil.getSession().beginTransaction();
+            Transaction ts = Accueil.getSession().beginTransaction();
             Accueil.getSession().delete(etabselec);
-            tx.commit();   
+            ts.commit();
             bCharge = false;
             chargerEtablissement();
          
