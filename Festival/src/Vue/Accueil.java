@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package Vue;
-import Hibernate.Etablissement;
 import Hibernate.HibernateUtil;
 import java.awt.Container;
 import org.hibernate.Session;
@@ -72,7 +71,7 @@ public class Accueil extends javax.swing.JFrame {
 
         jLabel2.setText("Accédez aux différentes parties de l'application via le menu du haut");
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("");
 
         mAccueil.setText("Accueil");
         jMenuBar1.add(mAccueil);
@@ -353,6 +352,7 @@ public class Accueil extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Accueil().setVisible(true);
+             
             }
         });
     }
@@ -381,4 +381,5 @@ public class Accueil extends javax.swing.JFrame {
     private javax.swing.JMenuItem mSupprEtab;
     private javax.swing.JMenu mTypChambres;
     // End of variables declaration//GEN-END:variables
+    
 }
