@@ -17,15 +17,27 @@ public class HebergementDAO {
 
     //Permet l'ajout d'une offre.
     public static void ajouter(Offre uneOffreAdd) {
-        Transaction tx = Accueil.getSession().beginTransaction();
+        try{
+            Transaction tx1= Accueil.getSession().beginTransaction();
         Accueil.getSession().save(uneOffreAdd);
-            tx.commit();
+            tx1.commit(); 
+        }
+        catch(Exception e){
+            javax.swing.JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout.");
+        }
+       
     }
 //Permet la modification du nombre de chambre.
     public static void Modifier(Offre uneOffreUp) {
+        try{
         Transaction tx = Accueil.getSession().beginTransaction();
             Accueil.getSession().update(uneOffreUp);
-            tx.commit();
+            tx.commit();    
+        }
+        catch(Exception e){
+            javax.swing.JOptionPane.showMessageDialog(null, "Erreur lors de la modification.");
+        }
+        
     }
 //Trouver une offre à partir de l'id type et de l'idEtablissement.
     public static Offre trouverOffre(String idType, String IdEtab) {
